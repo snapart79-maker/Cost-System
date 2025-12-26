@@ -1,0 +1,131 @@
+Metadata-Version: 2.4
+Name: backend
+Version: 0.1.0
+Summary: 와이어 하네스 매입 단가 관리 시스템 백엔드
+Author-email: Production Management <production@company.com>
+License: MIT
+Project-URL: Homepage, https://github.com/company/cost-system
+Project-URL: Documentation, https://github.com/company/cost-system#readme
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi>=0.115.0
+Requires-Dist: uvicorn[standard]>=0.32.0
+Requires-Dist: sqlalchemy[asyncio]>=2.0.0
+Requires-Dist: aiosqlite>=0.20.0
+Requires-Dist: pydantic>=2.10.0
+Requires-Dist: pydantic-settings>=2.6.0
+Requires-Dist: python-multipart>=0.0.18
+Requires-Dist: openpyxl>=3.1.5
+Requires-Dist: reportlab>=4.2.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.3.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.24.0; extra == "dev"
+Requires-Dist: pytest-cov>=6.0.0; extra == "dev"
+Requires-Dist: httpx>=0.28.0; extra == "dev"
+Requires-Dist: ruff>=0.8.0; extra == "dev"
+Requires-Dist: mypy>=1.13.0; extra == "dev"
+
+# Wire Harness Cost Management System - Backend
+
+와이어 하네스 매입 단가 관리 시스템 백엔드 API
+
+## Quick Start
+
+### Prerequisites
+
+- Python 3.11+
+- pip
+
+### Installation
+
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+source venv/bin/activate  # Linux/macOS
+# or
+.\venv\Scripts\activate  # Windows
+
+# Install package with dev dependencies
+pip install -e ".[dev]"
+```
+
+### Run Development Server
+
+```bash
+uvicorn backend.main:app --reload
+```
+
+API documentation: http://localhost:8000/docs
+
+### Run Tests
+
+```bash
+# Run all tests
+pytest
+
+# Run with coverage
+pytest --cov=backend --cov-report=html
+
+# Run specific test file
+pytest tests/test_setup.py -v
+```
+
+### Code Quality
+
+```bash
+# Linting
+ruff check .
+
+# Formatting
+ruff format .
+
+# Type checking
+mypy backend/
+```
+
+## Project Structure
+
+```
+backend/
+├── backend/                # Main package
+│   ├── config/             # Configuration
+│   ├── domain/             # Core business logic
+│   │   ├── entities/       # Business entities
+│   │   ├── repositories/   # Repository interfaces
+│   │   ├── services/       # Domain services
+│   │   └── value_objects/  # Value objects
+│   ├── application/        # Use cases layer
+│   │   ├── use_cases/      # Business use cases
+│   │   ├── dtos/           # Data transfer objects
+│   │   └── interfaces/     # External interfaces
+│   ├── infrastructure/     # External implementations
+│   │   ├── persistence/    # Database (SQLAlchemy)
+│   │   ├── excel/          # Excel processing
+│   │   └── pdf/            # PDF generation
+│   ├── presentation/       # API layer
+│   │   ├── api/v1/         # FastAPI routers
+│   │   └── schemas/        # Pydantic schemas
+│   └── main.py             # Application entry point
+├── tests/                  # Test suite
+├── pyproject.toml          # Project configuration
+└── README.md               # This file
+```
+
+## Architecture
+
+This project follows **Clean Architecture** principles:
+
+- **Domain Layer**: Pure Python, no external dependencies
+- **Application Layer**: Use cases, orchestrates domain logic
+- **Infrastructure Layer**: External systems (DB, Excel, PDF)
+- **Presentation Layer**: FastAPI REST API
+
+Dependencies flow inward: Presentation → Application → Domain ← Infrastructure
