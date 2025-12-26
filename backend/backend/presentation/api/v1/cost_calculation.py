@@ -33,6 +33,7 @@ from backend.presentation.schemas.cost_calculation_schema import (
     CostReportResponse,
     MaterialCostDetailResponse,
     ProcessCostDetailResponse,
+    WorkTypeCostBreakdownResponse,
 )
 
 router = APIRouter(prefix="/cost-calculation", tags=["Cost Calculation"])
@@ -60,6 +61,36 @@ async def calculate_cost(
         ],
     )
     result = await use_case.execute(dto)
+
+    # 내작/외작 원가 변환
+    in_house_response = None
+    if result.in_house:
+        in_house_response = WorkTypeCostBreakdownResponse(
+            material_cost=result.in_house.material_cost,
+            labor_cost=result.in_house.labor_cost,
+            machine_cost=result.in_house.machine_cost,
+            manufacturing_cost=result.in_house.manufacturing_cost,
+            material_management_fee=result.in_house.material_management_fee,
+            general_admin_fee=result.in_house.general_admin_fee,
+            defect_cost=result.in_house.defect_cost,
+            profit=result.in_house.profit,
+            purchase_cost=result.in_house.purchase_cost,
+        )
+
+    outsource_response = None
+    if result.outsource:
+        outsource_response = WorkTypeCostBreakdownResponse(
+            material_cost=result.outsource.material_cost,
+            labor_cost=result.outsource.labor_cost,
+            machine_cost=result.outsource.machine_cost,
+            manufacturing_cost=result.outsource.manufacturing_cost,
+            material_management_fee=result.outsource.material_management_fee,
+            general_admin_fee=result.outsource.general_admin_fee,
+            defect_cost=result.outsource.defect_cost,
+            profit=result.outsource.profit,
+            purchase_cost=result.outsource.purchase_cost,
+        )
+
     return CostBreakdownResponse(
         product_id=result.product_id,
         gross_material_cost=result.gross_material_cost,
@@ -73,6 +104,8 @@ async def calculate_cost(
         defect_cost=result.defect_cost,
         profit=result.profit,
         purchase_cost=result.purchase_cost,
+        in_house=in_house_response,
+        outsource=outsource_response,
         material_details=[
             MaterialCostDetailResponse(
                 material_id=m.material_id,
@@ -82,6 +115,7 @@ async def calculate_cost(
                 material_cost=m.material_cost,
                 scrap_value=m.scrap_value,
                 net_cost=m.net_cost,
+                work_type=m.work_type,
             )
             for m in result.material_details
         ],
@@ -94,6 +128,7 @@ async def calculate_cost(
                 labor_cost=p.labor_cost,
                 machine_cost=p.machine_cost,
                 total_cost=p.total_cost,
+                work_type=p.work_type,
             )
             for p in result.process_details
         ],

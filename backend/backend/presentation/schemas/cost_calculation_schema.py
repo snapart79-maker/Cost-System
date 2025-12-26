@@ -37,6 +37,7 @@ class MaterialCostDetailResponse(BaseModel):
     material_cost: Decimal
     scrap_value: Decimal
     net_cost: Decimal
+    work_type: str = Field(default="IN_HOUSE", description="내작/외작 구분")
 
 
 class ProcessCostDetailResponse(BaseModel):
@@ -49,6 +50,21 @@ class ProcessCostDetailResponse(BaseModel):
     labor_cost: Decimal
     machine_cost: Decimal
     total_cost: Decimal
+    work_type: str = Field(default="IN_HOUSE", description="내작/외작 구분")
+
+
+class WorkTypeCostBreakdownResponse(BaseModel):
+    """내작/외작별 원가 분류 응답 스키마."""
+
+    material_cost: Decimal = Field(default=Decimal("0"), description="재료비")
+    labor_cost: Decimal = Field(default=Decimal("0"), description="노무비")
+    machine_cost: Decimal = Field(default=Decimal("0"), description="경비")
+    manufacturing_cost: Decimal = Field(default=Decimal("0"), description="제조원가")
+    material_management_fee: Decimal = Field(default=Decimal("0"), description="재료관리비")
+    general_admin_fee: Decimal = Field(default=Decimal("0"), description="일반관리비")
+    defect_cost: Decimal = Field(default=Decimal("0"), description="불량비")
+    profit: Decimal = Field(default=Decimal("0"), description="이윤")
+    purchase_cost: Decimal = Field(default=Decimal("0"), description="구매원가")
 
 
 class CostBreakdownResponse(BaseModel):
@@ -66,6 +82,15 @@ class CostBreakdownResponse(BaseModel):
     defect_cost: Decimal = Field(default=Decimal("0"))
     profit: Decimal = Field(default=Decimal("0"))
     purchase_cost: Decimal = Field(default=Decimal("0"))
+
+    # 내작/외작별 분류
+    in_house: WorkTypeCostBreakdownResponse | None = Field(
+        default=None, description="내작 원가"
+    )
+    outsource: WorkTypeCostBreakdownResponse | None = Field(
+        default=None, description="외작 원가"
+    )
+
     material_details: list[MaterialCostDetailResponse] = Field(default_factory=list)
     process_details: list[ProcessCostDetailResponse] = Field(default_factory=list)
 

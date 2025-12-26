@@ -16,6 +16,7 @@ from backend.application.dtos.cost_calculation_dto import (
     CostReportDTO,
     MaterialCostDetail,
     ProcessCostDetail,
+    WorkTypeCostBreakdown,
 )
 from backend.domain.repositories.bom_repository import BOMRepository
 from backend.domain.repositories.material_repository import MaterialRepository
@@ -58,30 +59,36 @@ class CalculateCostUseCase:
             dto: 원가 계산 DTO
 
         Returns:
-            원가 명세 결과 DTO
+            원가 명세 결과 DTO (내작/외작 분리 포함)
         """
         # BOM 조회
         bom = await self._bom_repo.get_by_product_id(dto.product_id)
         if not bom:
             return CostBreakdownResultDTO(product_id=dto.product_id)
 
-        # 자재 정보 수집 및 재료비 계산
-        materials = []
+        # 자재 정보 수집 및 재료비 계산 (내작/외작 분리)
         material_details = []
         gross_material_cost = Decimal("0")
         scrap_value = Decimal("0")
+        in_house_material = Decimal("0")
+        outsource_material = Decimal("0")
 
         for item in bom.items:
             material = await self._material_repo.get_by_id(item.material_id)
             if material:
-                materials.append((material, item.quantity, item.work_type))
-
                 mat_cost = material.calculate_material_cost(item.quantity)
                 mat_scrap = material.calculate_scrap_value(item.quantity)
                 net_cost = material.calculate_net_material_cost(item.quantity)
 
                 gross_material_cost += mat_cost
                 scrap_value += mat_scrap
+
+                # 내작/외작 분류
+                work_type_str = item.work_type.value
+                if item.work_type.value == "IN_HOUSE":
+                    in_house_material += net_cost
+                else:
+                    outsource_material += net_cost
 
                 material_details.append(
                     MaterialCostDetail(
@@ -92,14 +99,19 @@ class CalculateCostUseCase:
                         material_cost=mat_cost,
                         scrap_value=mat_scrap,
                         net_cost=net_cost,
+                        work_type=work_type_str,
                     )
                 )
 
         net_material_cost = gross_material_cost - scrap_value
 
-        # 공정비 계산
+        # 공정비 계산 (내작/외작 분리)
         labor_cost = Decimal("0")
         machine_cost = Decimal("0")
+        in_house_labor = Decimal("0")
+        in_house_machine = Decimal("0")
+        outsource_labor = Decimal("0")
+        outsource_machine = Decimal("0")
         process_details = []
 
         for proc_info in dto.processes:
@@ -113,6 +125,15 @@ class CalculateCostUseCase:
                 labor_cost += proc_labor
                 machine_cost += proc_machine
 
+                # 내작/외작 분류
+                work_type_str = process.work_type.value
+                if process.work_type.value == "IN_HOUSE":
+                    in_house_labor += proc_labor
+                    in_house_machine += proc_machine
+                else:
+                    outsource_labor += proc_labor
+                    outsource_machine += proc_machine
+
                 process_details.append(
                     ProcessCostDetail(
                         process_id=process.process_id,
@@ -122,16 +143,55 @@ class CalculateCostUseCase:
                         labor_cost=proc_labor,
                         machine_cost=proc_machine,
                         total_cost=proc_labor + proc_machine,
+                        work_type=work_type_str,
                     )
                 )
 
-        # 제조원가 및 구매원가 계산
+        # 전체 제조원가 및 구매원가 계산
         cost_input = CostInput(
             material_cost=net_material_cost,
             labor_cost=labor_cost,
             machine_cost=machine_cost,
         )
         breakdown = self._manufacturing_cost_service.calculate(cost_input)
+
+        # 내작 원가 계산
+        in_house_input = CostInput(
+            material_cost=in_house_material,
+            labor_cost=in_house_labor,
+            machine_cost=in_house_machine,
+        )
+        in_house_breakdown = self._manufacturing_cost_service.calculate(in_house_input)
+        in_house_cost = WorkTypeCostBreakdown(
+            material_cost=in_house_material,
+            labor_cost=in_house_labor,
+            machine_cost=in_house_machine,
+            manufacturing_cost=in_house_breakdown.manufacturing_cost,
+            material_management_fee=in_house_breakdown.material_management_fee,
+            general_admin_fee=in_house_breakdown.general_admin_fee,
+            defect_cost=in_house_breakdown.defect_cost,
+            profit=in_house_breakdown.profit,
+            purchase_cost=in_house_breakdown.purchase_cost,
+        )
+
+        # 외작 원가 계산
+        outsource_input = CostInput(
+            material_cost=outsource_material,
+            labor_cost=outsource_labor,
+            machine_cost=outsource_machine,
+        )
+        outsource_breakdown = self._manufacturing_cost_service.calculate(outsource_input)
+        outsource_cost = WorkTypeCostBreakdown(
+            material_cost=outsource_material,
+            labor_cost=outsource_labor,
+            machine_cost=outsource_machine,
+            manufacturing_cost=outsource_breakdown.manufacturing_cost,
+            material_management_fee=outsource_breakdown.material_management_fee,
+            general_admin_fee=outsource_breakdown.general_admin_fee,
+            defect_cost=outsource_breakdown.defect_cost,
+            profit=outsource_breakdown.profit,
+            purchase_cost=outsource_breakdown.purchase_cost,
+        )
 
         return CostBreakdownResultDTO(
             product_id=dto.product_id,
@@ -146,6 +206,8 @@ class CalculateCostUseCase:
             defect_cost=breakdown.defect_cost,
             profit=breakdown.profit,
             purchase_cost=breakdown.purchase_cost,
+            in_house=in_house_cost,
+            outsource=outsource_cost,
             material_details=material_details,
             process_details=process_details,
         )

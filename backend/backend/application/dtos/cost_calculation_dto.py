@@ -48,6 +48,22 @@ class ProcessCostDetail:
     labor_cost: Decimal
     machine_cost: Decimal
     total_cost: Decimal
+    work_type: str = "IN_HOUSE"  # IN_HOUSE or OUTSOURCE
+
+
+@dataclass
+class WorkTypeCostBreakdown:
+    """내작/외작별 원가 분류."""
+
+    material_cost: Decimal = Decimal("0")  # 재료비
+    labor_cost: Decimal = Decimal("0")  # 노무비
+    machine_cost: Decimal = Decimal("0")  # 경비
+    manufacturing_cost: Decimal = Decimal("0")  # 제조원가
+    material_management_fee: Decimal = Decimal("0")  # 재료관리비
+    general_admin_fee: Decimal = Decimal("0")  # 일반관리비
+    defect_cost: Decimal = Decimal("0")  # 불량비
+    profit: Decimal = Decimal("0")  # 이윤
+    purchase_cost: Decimal = Decimal("0")  # 구매원가
 
 
 @dataclass
@@ -66,6 +82,10 @@ class CostBreakdownResultDTO:
     defect_cost: Decimal = Decimal("0")
     profit: Decimal = Decimal("0")
     purchase_cost: Decimal = Decimal("0")
+
+    # 내작/외작별 분류
+    in_house: WorkTypeCostBreakdown | None = None
+    outsource: WorkTypeCostBreakdown | None = None
 
     # 선택적 상세 정보
     material_details: list[MaterialCostDetail] = field(default_factory=list)
