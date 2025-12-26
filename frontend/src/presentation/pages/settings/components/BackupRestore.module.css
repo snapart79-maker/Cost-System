@@ -1,0 +1,32 @@
+/**
+ * BackupRestore Styles
+ */
+
+.card {
+  margin-bottom: 16px;
+}
+
+.section {
+  margin-bottom: 16px;
+}
+
+.infoSection {
+  background-color: #fafafa;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.dataList {
+  margin-top: 12px;
+  padding-left: 20px;
+}
+
+.dataList li {
+  margin-bottom: 8px;
+  color: #666;
+}
+
+.checkIcon {
+  color: #52c41a;
+  margin-right: 8px;
+}

@@ -1,0 +1,35 @@
+/**
+ * PriceChangeRegisterPage Styles
+ */
+
+.container {
+  padding: 0;
+}
+
+.changeItemsCard {
+  margin-bottom: 16px;
+}
+
+.actionsCard {
+  position: sticky;
+  top: 16px;
+}
+
+.actions {
+  width: 100%;
+}
+
+.confirmPreview {
+  margin-top: 16px;
+  padding: 16px;
+  background-color: #fafafa;
+  border-radius: 6px;
+}
+
+.confirmPreview p {
+  margin-bottom: 8px;
+}
+
+.confirmPreview p:last-child {
+  margin-bottom: 0;
+}

@@ -1,0 +1,123 @@
+/**
+ * Common Components Shared Styles
+ */
+
+/* PageHeader */
+.pageHeader {
+  padding: 16px 0;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.breadcrumb {
+  margin-bottom: 12px;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.titleSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.backButton {
+  padding: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.title {
+  margin: 0 !important;
+}
+
+.subtitle {
+  display: block;
+  margin-top: 4px;
+}
+
+.actionSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* LoadingSpinner */
+.spinnerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+}
+
+.fullScreenLoader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.85);
+  z-index: 1000;
+}
+
+/* ErrorBoundary */
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 24px;
+}
+
+.errorDetails {
+  text-align: left;
+  margin-top: 16px;
+  padding: 16px;
+  background-color: #fafafa;
+  border-radius: 8px;
+}
+
+.stackTrace {
+  font-size: 12px;
+  overflow-x: auto;
+  max-height: 200px;
+  background-color: #fff;
+  padding: 12px;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+}
+
+/* ConfirmModal */
+.confirmModal :global(.ant-modal-body) {
+  padding: 24px;
+}
+
+.confirmContent {
+  padding: 8px 0;
+}
+
+.confirmIcon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.confirmTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 8px;
+}
+
+.confirmDescription {
+  display: block;
+  font-size: 14px;
+}

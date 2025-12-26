@@ -863,3 +863,31 @@ mypy backend/
 - Clean Architecture 구조 완전 구현
 - REST API + Excel + PDF 기능 완성
 - 프론트엔드 연결 준비 완료
+
+---
+
+## 📌 Pending Tasks (프론트엔드 구현 시 처리)
+
+### Excel Export 양식 개선
+**우선순위**: High
+**관련 파일**: `backend/infrastructure/excel/excel_export_service.py`
+
+**현재 상태**:
+- 단순 테이블 형식으로 Export 구현됨
+- 내작/외작 분리 API는 완료됨
+
+**TODO**:
+- [ ] 원가 계산서 샘플 양식에 맞게 Excel Export 수정
+  - 참조: `/Users/snapart79gmail.com/Projects/Cost-System/원가 계산서 샘플.xlsx`
+  - 셀 병합, 고정 레이아웃, 내작/외작/계 컬럼 구조
+- [ ] 재료비 상세내역 시트 추가 (품번(절압품), 품번(원재료), 품명, 규격 등)
+- [ ] 가공비 상세내역 시트 추가
+
+**샘플 양식 구조**:
+```
+Row 1-4:  헤더 (원가계산서, 작성일자, 차종, 품번 등)
+Row 6-22: 원가 계산 (재료비, 노무비, 경비, 제조원가, 구매원가 등)
+          - 컬럼: 원가요소 | 계산수식 | 외작 | 내작 | 계
+Row 26+:  재료비 상세내역
+          - 컬럼: NO, 품번(절압품), 품번(원재료), 품명, 내외작, 규격, 단위, 수량, 단가, 재료비, SCRAP비, 합계
+```

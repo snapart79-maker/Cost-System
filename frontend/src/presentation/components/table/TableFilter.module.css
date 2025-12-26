@@ -1,0 +1,97 @@
+/**
+ * TableFilter Styles
+ */
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.activeButton {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.filterContent {
+  width: 280px;
+}
+
+.filterHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.filterTitle {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.filterBody {
+  padding: 12px 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.filterItem {
+  margin-bottom: 12px;
+}
+
+.filterItem:last-child {
+  margin-bottom: 0;
+}
+
+.filterLabel {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.numberFilter {
+  width: 100%;
+}
+
+.selectFilter {
+  width: 100%;
+}
+
+.dateFilter {
+  width: 100%;
+}
+
+.filterFooter {
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+  text-align: right;
+}
+
+.activeTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filterTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 12px;
+  background-color: #e6f7ff;
+  border: 1px solid #91d5ff;
+  border-radius: 4px;
+  color: #1890ff;
+}
+
+.removeTag {
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.removeTag:hover {
+  color: #ff4d4f;
+}

@@ -1,0 +1,36 @@
+/**
+ * RecentChanges Styles
+ */
+
+.card {
+  margin-bottom: 16px;
+}
+
+.viewAll {
+  font-size: 14px;
+}
+
+.listItem {
+  padding: 12px 0;
+}
+
+.itemTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.itemDesc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.date {
+  font-size: 12px;
+}
+
+.costDiff {
+  font-weight: 500;
+}

@@ -1,0 +1,36 @@
+/**
+ * BulkEditModal Styles
+ */
+
+.tabContent {
+  padding: 16px 0;
+}
+
+.alert {
+  margin-bottom: 16px;
+}
+
+.uploadArea {
+  width: 100%;
+}
+
+.pasteArea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 13px;
+  resize: vertical;
+  margin-bottom: 16px;
+}
+
+.pasteArea:focus {
+  border-color: #1890ff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.applyButton {
+  width: 100%;
+}

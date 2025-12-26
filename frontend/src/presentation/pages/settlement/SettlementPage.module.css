@@ -1,0 +1,9 @@
+/**
+ * SettlementPage Styles
+ */
+
+.container {
+  padding: 24px;
+  min-height: 100%;
+  background-color: #f0f2f5;
+}

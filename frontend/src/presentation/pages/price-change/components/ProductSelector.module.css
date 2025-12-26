@@ -1,0 +1,26 @@
+/**
+ * ProductSelector Styles
+ */
+
+.container {
+  margin-bottom: 16px;
+}
+
+.selectorRow {
+  margin-bottom: 16px;
+}
+
+.selector {
+  width: 100%;
+  max-width: 600px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
+.productInfo {
+  margin-top: 16px;
+}

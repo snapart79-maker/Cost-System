@@ -1,0 +1,12 @@
+.container {
+  padding: 8px 0;
+}
+
+.summaryRow {
+  background-color: #fafafa;
+}
+
+.totalValue {
+  color: #1890ff;
+  font-size: 14px;
+}

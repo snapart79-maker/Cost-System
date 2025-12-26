@@ -1,0 +1,12 @@
+/**
+ * HistorySearchForm Styles
+ */
+
+.form {
+  margin-bottom: 16px;
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: flex-end;
+}

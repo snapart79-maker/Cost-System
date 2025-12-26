@@ -1,0 +1,128 @@
+/**
+ * Cost Components Shared Styles
+ */
+
+/* CostSummaryCard */
+.summaryCard {
+  margin-bottom: 16px;
+}
+
+.costItem {
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.costItem.highlight {
+  background-color: #e6f7ff;
+  border: 1px solid #91d5ff;
+}
+
+.costLabel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.infoIcon {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+  cursor: help;
+}
+
+.costValue {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.changeIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.changeIndicator.increase {
+  color: #ff4d4f;
+  background-color: #fff2f0;
+}
+
+.changeIndicator.decrease {
+  color: #52c41a;
+  background-color: #f6ffed;
+}
+
+.totalSection {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.totalLabel {
+  font-size: 16px;
+}
+
+.totalValue {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+/* CostBreakdownTable */
+.breakdownTable {
+  margin-bottom: 16px;
+}
+
+.tableHeader {
+  margin-bottom: 12px;
+}
+
+.summaryRow {
+  background-color: #fafafa;
+}
+
+/* CostComparisonView */
+.comparisonCard {
+  margin-bottom: 16px;
+}
+
+.comparisonHeader {
+  padding: 8px 0;
+  font-weight: 600;
+}
+
+.comparisonRow {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.comparisonRow:last-child {
+  border-bottom: none;
+}
+
+.totalRow {
+  padding: 16px 0;
+  background-color: #fafafa;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.textRight {
+  text-align: right;
+}
+
+.percentage {
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.divider {
+  margin: 8px 0;
+}

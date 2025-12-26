@@ -1,0 +1,25 @@
+/**
+ * MasterDataPage Styles
+ */
+
+.container {
+  padding: 0 24px 24px;
+}
+
+.tabCard {
+  margin-top: 16px;
+}
+
+.tabs :global(.ant-tabs-nav) {
+  margin-bottom: 16px;
+}
+
+.tabs :global(.ant-tabs-tab) {
+  padding: 12px 16px;
+}
+
+.tabs :global(.ant-tabs-tab-btn) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

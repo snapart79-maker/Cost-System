@@ -1,0 +1,45 @@
+/**
+ * CostPreview Styles
+ */
+
+.container {
+  margin-bottom: 16px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px;
+}
+
+.empty {
+  text-align: center;
+  padding: 48px;
+  color: #999;
+}
+
+.summaryRow {
+  margin-bottom: 16px;
+}
+
+.summaryCard {
+  text-align: center;
+}
+
+.percentTag {
+  margin-top: 8px;
+}
+
+.table :global(.ant-table-cell) {
+  padding: 8px 12px !important;
+}
+
+.highlightRow {
+  background-color: #fffbe6 !important;
+  font-weight: 600;
+}
+
+.highlightRow:hover {
+  background-color: #fff1b8 !important;
+}

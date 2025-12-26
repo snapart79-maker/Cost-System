@@ -1,0 +1,60 @@
+/**
+ * ProcessChangeTable Styles
+ */
+
+.container {
+  margin-bottom: 16px;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th,
+.table td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.table th {
+  background-color: #fafafa;
+  font-weight: 600;
+}
+
+.table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+.editableCell {
+  padding: 4px 8px;
+  border: 1px dashed transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.editableCell:hover {
+  border-color: #1890ff;
+  background-color: #e6f7ff;
+}
+
+.deletedRow {
+  opacity: 0.5;
+  text-decoration: line-through;
+  background-color: #fff2f0;
+}
+
+.empty {
+  text-align: center;
+  padding: 24px;
+  color: #999;
+}

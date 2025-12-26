@@ -1,0 +1,49 @@
+.container {
+  padding: 0;
+}
+
+.filterCard {
+  margin-bottom: 16px;
+}
+
+.label {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.productSelect {
+  width: 400px;
+}
+
+.rightControls {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.productInfoCard {
+  margin-bottom: 16px;
+  background-color: #fafafa;
+}
+
+.emptyCard {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingCard {
+  min-height: 400px;
+}
+
+.loadingWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.detailsCard {
+  margin-top: 16px;
+}

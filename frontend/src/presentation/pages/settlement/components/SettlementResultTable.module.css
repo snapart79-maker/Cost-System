@@ -1,0 +1,23 @@
+/**
+ * SettlementResultTable Styles
+ */
+
+.container {
+  margin-bottom: 16px;
+}
+
+.increase {
+  color: #cf1322;
+}
+
+.decrease {
+  color: #389e0d;
+}
+
+.summaryRow {
+  background-color: #fafafa;
+}
+
+.summaryRow td {
+  padding: 12px 8px;
+}

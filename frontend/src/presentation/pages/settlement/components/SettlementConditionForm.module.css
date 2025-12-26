@@ -1,0 +1,37 @@
+/**
+ * SettlementConditionForm Styles
+ */
+
+.container {
+  margin-bottom: 16px;
+}
+
+.changeInfo {
+  margin-top: 16px;
+  padding: 12px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+.infoItem {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.infoItem:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  font-weight: 500;
+  min-width: 100px;
+  color: #666;
+}
+
+.increase {
+  color: #cf1322;
+}
+
+.decrease {
+  color: #389e0d;
+}
